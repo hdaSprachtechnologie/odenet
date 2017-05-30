@@ -1,0 +1,2 @@
+# odenet
+Open German WordNet
