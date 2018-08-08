@@ -28,4 +28,4 @@ The current version is automatically compiled. We have started to check synsets 
 
 ## License
 
-The Open German WordNet is openly licensed under CC-BY-SA 4.0.
+The Open German WordNet is openly licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
