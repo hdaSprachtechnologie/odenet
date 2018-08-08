@@ -24,4 +24,8 @@ we implemented an analysis of German nominal compounds and used
 this information for the addition of hypernym relations.
 
 
-The current version is automatically compiled. We have started to check synsets manually. 
+The current version is automatically compiled. We have started to check synsets manually.
+
+## License
+
+The Open German WordNet is openly licensed under CC-BY-SA 4.0.
