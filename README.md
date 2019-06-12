@@ -1,4 +1,3 @@
-# odenet
 Open German WordNet
 
 The Open-de-WordNet initiative is based on the idea to have a German resource in a multilingual WordNet initiative, where the concepts (the synsets) of the languages are linked, and where the resources are under an open-source license, being eventually included in the NLTK language processing package. WordNet resources are largely used in NLP projects all over the world. Our idea is to create a German resource that starts from a crowd-developed thesaurus, is going to be open, and included in the NLTK package, such that it will be further developed by researchers while using the resource for their NLP projects.
@@ -23,9 +22,11 @@ in Odenet, added missing entries and corrected synsets manually. Then,
 we implemented an analysis of German nominal compounds and used
 this information for the addition of hypernym relations.
 
+The current version is automatically compiled. We have started to check synsets manually. 
 
-The current version is automatically compiled. We have started to check synsets manually.
+The jupyter notebook file contains methods to access the data.
 
-## License
+License
 
 The Open German WordNet is openly licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+
