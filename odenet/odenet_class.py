@@ -5,13 +5,20 @@ from random import *
 import re
 import networkx as nx
 import matplotlib.pyplot as plt
+import os
 G=nx.Graph()
 
-# Ein- und Ausgabedateien: Achtung: OdeNet in der Version mit einem Eintrag pro Zeile!
+# Ein- und Ausgabedateien: Achtung: OdeNet in der Version mit einem Eintrag pro Zeile, wenn man die Datei ändern will!
 
 #de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\odenet.git\trunk\deWordNet.xml","r",encoding="utf-8")
-de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","r",encoding="utf-8")
-en_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml","r",encoding="utf-8")
+#de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","r",encoding="utf-8")
+#en_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml","r",encoding="utf-8")
+
+de_wn_file = os.path.join(os.path.dirname(__file__), f"..\deWordNet.xml")
+de_wn = open(de_wn_file,"r",encoding="utf-8")
+
+en_wn_file = os.path.join(os.path.dirname(__file__), f"..\english-wordnet-2020.xml")
+en_wn = open(de_wn_file,"r",encoding="utf-8")
 
 #out_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","w",encoding="utf-8")
 
