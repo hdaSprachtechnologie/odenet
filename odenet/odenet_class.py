@@ -17,8 +17,8 @@ G=nx.Graph()
 de_wn_file = os.path.join(os.path.dirname(__file__), f"..\deWordNet.xml")
 de_wn = open(de_wn_file,"r",encoding="utf-8")
 
-en_wn_file = os.path.join(os.path.dirname(__file__), f"..\english-wordnet-2020.xml")
-en_wn = open(de_wn_file,"r",encoding="utf-8")
+en_wn_file = os.path.join(os.path.dirname(__file__), f"..\English_WN\english-wordnet-2020.xml")
+en_wn = open(en_wn_file,"r",encoding="utf-8")
 
 #out_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","w",encoding="utf-8")
 
