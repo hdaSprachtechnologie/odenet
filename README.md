@@ -1,4 +1,8 @@
 Open German WordNet
+===
+
+Introduction
+---
 
 The Open-de-WordNet initiative is based on the idea to have a German resource in a multilingual WordNet initiative, where the concepts (the synsets) of the languages are linked, and where the resources are under an open-source license, being eventually included in the NLTK language processing package. WordNet resources are largely used in NLP projects all over the world. Our idea is to create a German resource that starts from a crowd-developed thesaurus, is going to be open, and included in the NLTK package, such that it will be further developed by researchers while using the resource for their NLP projects.
 For the first version, we combined two existing resources: The OpenThesaurus German synonym lexicon (https://www.openthesaurus.de/) and the Open Multilingual WordNet English (http://compling.hss.ntu.edu.sg/omw/) resource, the PrincetonWordNet of English (PWN). The OpenThesaurus is a great chance of using a large resource, generated and updated by the crowd. The PWN resource is a well-developed resource for English concepts. It includes many relations between the concepts and is linked to resources for multiple languages. 
@@ -16,7 +20,7 @@ listed in https://de.wiktionary.org/wiki/Verzeichnis:Deutsch/
 Grundwortschatz. We annotated all lexical entries (except for function
 words) of this list with
 
-dc:type="basic_German"
+`dc:type="basic_German"`
 
 in Odenet, added missing entries and corrected synsets manually. Then,
 we implemented an analysis of German nominal compounds and used
@@ -26,7 +30,41 @@ The current version is automatically compiled. We have started to check synsets 
 
 The jupyter notebook file contains methods to access the data.
 
+Installation
+---
+
+For an Anaconda environment, where `pip` is available, please `cd`
+to the appropriate package directory, where the `setup.py` file is
+located and type either
+
+`pip install .`
+
+for a user installation or
+
+`pip install -e .`
+
+for a developer installation (`-e` for editable). 
+
+The difference between those is that the first
+copies all files into the Python environment and they can only
+be modified directly (which is discouraged) or by reinstalling
+the package. The latter option provides only a link from your local
+Python environment to the actual directory and therefore it is
+possible to modify the files on the fly and still use the package
+in a pythonic way.
+
+Basic Usage
+---
+
+TO BE WRITTEN (depends on interface)
+
+Uninstall
+---
+
+Open the Anaconda terminal and type `pip uninstall odenet`.
+
 License
+---
 
 The Open German WordNet is openly licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 

@@ -8,17 +8,19 @@ import matplotlib.pyplot as plt
 import os
 G=nx.Graph()
 
+# TODO: this global file handling should be incorporated into a class
+
 # Ein- und Ausgabedateien: Achtung: OdeNet in der Version mit einem Eintrag pro Zeile, wenn man die Datei ändern will!
 
 #de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\odenet.git\trunk\deWordNet.xml","r",encoding="utf-8")
 #de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","r",encoding="utf-8")
 #en_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml","r",encoding="utf-8")
 
-de_wn_file = os.path.join(os.path.dirname(__file__), f"..\deWordNet.xml")
+de_wn_file = os.path.join(os.path.dirname(__file__), f"wordnet/deWordNet.xml")
 de_wn = open(de_wn_file,"r",encoding="utf-8")
 
-en_wn_file = os.path.join(os.path.dirname(__file__), f"..\English_WN\english-wordnet-2020.xml")
-en_wn = open(en_wn_file,"r",encoding="utf-8")
+#en_wn_file = os.path.join(os.path.dirname(__file__), f"..\English_WN\english-wordnet-2020.xml")
+#en_wn = open(en_wn_file,"r",encoding="utf-8")
 
 #out_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","w",encoding="utf-8")
 
@@ -28,14 +30,14 @@ root = tree.getroot()
 
 lexicon = root.find('Lexicon')
 
-entree = ET.parse(en_wn)
+#entree = ET.parse(en_wn)
 
-enroot = entree.getroot()
+#enroot = entree.getroot()
 
-enlexicon = enroot.find('Lexicon')
+#enlexicon = enroot.find('Lexicon')
 
 de_wn.close()
-en_wn.close()
+#en_wn.close()
 
 ## Definitionen, die für die Methoden gebraucht werden
 
