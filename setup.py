@@ -28,12 +28,11 @@ setup(
     description="Open German WordNet",
     author="Melanie Siegel",
     author_email="melanie.siegel@h-da.de",
-    url="https://ikum.mediencampus.h-da.de/projekt/open-de-wordnet-initiative/",
+    url="https://ikum.mediencampus.h-da.de/projekt/open-de-wordnet-initiative/",  # maybe use github url
     keywords=["german", "wordnet", "xml"],
     classifiers=[
           'Development Status :: 2 - Pre-Alpha',  # can be updated, when project is more mature
           'Environment :: Console',
-          'Environment :: Web Environment',
           'Intended Audience :: End Users/Desktop',  # TODO: is it really usable by End Users?
           'Intended Audience :: Developers',
           'Intended Audience :: Education',
@@ -43,8 +42,7 @@ setup(
           'Operating System :: OS Independent',
           'Programming Language :: Python',
           'Topic :: Education',
-          'Topic :: Text Processing :: Linguistic',
-          'Topic :: Utilities'
+          'Topic :: Text Processing :: Linguistic'
     ],
     long_description=long_description
 )
