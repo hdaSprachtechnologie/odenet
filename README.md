@@ -68,3 +68,5 @@ License
 
 The Open German WordNet is openly licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
+The Python code files are openly licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
