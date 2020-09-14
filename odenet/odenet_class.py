@@ -19,8 +19,8 @@ G=nx.Graph()
 de_wn_file = os.path.join(os.path.dirname(__file__), f"wordnet/deWordNet.xml")
 de_wn = open(de_wn_file,"r",encoding="utf-8")
 
-#en_wn_file = os.path.join(os.path.dirname(__file__), f"..\English_WN\english-wordnet-2020.xml")
-#en_wn = open(en_wn_file,"r",encoding="utf-8")
+en_wn_file = os.path.join(os.path.dirname(__file__), f"..\..\..\..\English_WN\english-wordnet-2020.xml")
+en_wn = open(en_wn_file,"r",encoding="utf-8")
 
 #out_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","w",encoding="utf-8")
 
@@ -30,11 +30,11 @@ root = tree.getroot()
 
 lexicon = root.find('Lexicon')
 
-#entree = ET.parse(en_wn)
+entree = ET.parse(en_wn)
 
-#enroot = entree.getroot()
+enroot = entree.getroot()
 
-#enlexicon = enroot.find('Lexicon')
+enlexicon = enroot.find('Lexicon')
 
 de_wn.close()
 #en_wn.close()

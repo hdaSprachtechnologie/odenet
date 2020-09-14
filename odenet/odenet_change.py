@@ -10,6 +10,90 @@ from odenet.odenet_class import *
 # Relationen dem Synset hinzufügen
 # add_rel_to_ss(synset,relation,r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml")
 
+de_wn_file = os.path.join(os.path.dirname(__file__), f"wordnet/deWordNet.xml")
+de_wn = open(de_wn_file,"r",encoding="utf-8")
+
+
+# Ziel:  OdeNet editieren, sodass die Einträge jeweils auf einer Zeile stehen
+
+def format_odenet_oneline():
+    lines = de_wn.readlines()
+    de_wn.close()
+    out_odenet = open("odenet_oneline.xml","w", encoding="utf-8")
+    for line in lines:
+        if re.match(r'^\t*<LexicalEntry', line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<Lemma',line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<Sense',line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*</Sense',line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<SyntacticBehaviour',line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*</SyntacticBehaviour',line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*</LexicalEntry>', line):
+            line = line.strip('\t')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<Synset.*partOfSpeech="[a-z]"/>', line):
+            line = line.strip('\t')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<Synset.*dc:description=".*"/>', line):
+            line = line.strip('\t')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<Synset',line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)       
+        elif re.match(r'^\t*<Definition', line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*</Definition', line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*<Example', line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*</Example', line):
+            line = line.strip('\t')
+            line = line.strip('\r')
+            line = line.strip('\n')
+            out_odenet.write(line)
+        elif re.match(r'^\t*</Synset>', line):
+            line = line.strip('\t')
+            out_odenet.write(line)
+        else:
+            out_odenet.write(line)
+    out_odenet.close()
+
+
+
 
 def add_rel_to_ss(synset,relation,wordnetfile):
     if synset not in relation:
@@ -34,9 +118,9 @@ def add_rel_to_ss(synset,relation,wordnetfile):
 # change_attribute_in_ss('odenet-412-a','ili','i10007',r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml")
 
 def change_attribute_in_ss(synset,att,value,wordnetfile):
-        de_wn = open(wordnetfile,"r",encoding="utf-8")
-        lines = de_wn.readlines()
-        de_wn.close()
+        in_odenet = open(wordnetfile,"r",encoding="utf-8")
+        lines = in_odenet.readlines()
+        in_odenet.close()
         out_odenet = open(wordnetfile,"w",encoding="utf-8")
         ss_string = '<Synset id="' + synset + '"'
         for line in lines:
@@ -133,13 +217,15 @@ def add_example_to_ss(synset,example, wordnetfile):
             out_odenet.write(line)
         out_odenet.close()
 
+
+
 # Die Version ohne Zeilenumbruch als Pretty Print speichern
 
 def prettyprint_odenet():
-    oneline_odenet = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","r", encoding="utf-8")
+    oneline_odenet = open(r"odenet_oneline.xml","r", encoding="utf-8")
     lines = oneline_odenet.readlines()
     oneline_odenet.close()
-    pretty_odenet = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\odenet.git\trunk\deWordNet.xml","w",encoding="utf-8")
+    pretty_odenet = open(de_wn_file,"w",encoding="utf-8")
     for line in lines:
         line = line.replace("<Lemma","\n\t<Lemma")
         line = line.replace("<Sense","\n\t<Sense")
