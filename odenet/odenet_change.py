@@ -95,24 +95,34 @@ def format_odenet_oneline():
 
 
 
-def add_rel_to_ss(synset,relation,wordnetfile):
-    if synset not in relation:
+def add_rel_to_ss(synset,relation,target,wordnetfile):
+    if synset not in target:
         de_wn = open(wordnetfile,"r",encoding="utf-8")
         lines = de_wn.readlines()
         de_wn.close() 
         out_odenet = open(wordnetfile,"w",encoding="utf-8")
         ss_string = '<Synset id="' + synset + '"'
         for line in lines:
-            if ss_string in line and relation not in line:
+            if ss_string in line and target not in line:
                 if '<Example>' in line:
-                    line = line.replace('<Example>',relation + '<Example>')
+                    line = line.replace('<Example>',"<SynsetRelation target='" + target + "' relType='" + relation + "'/>" + '<Example>')
                 elif '</Synset>' in line:
-                    line = line.replace('</Synset>',relation + '</Synset>')
+                    line = line.replace('</Synset>',"<SynsetRelation target='" + target + "' relType='" + relation + "'/>" + '</Synset>')
                 else:
-                    line = line.replace('/>', '>' + relation + '</Synset>')
+                    line = line.replace('/>', '>' + "<SynsetRelation target='" + target + "' relType='" + relation + "'/>" + '</Synset>')
                 print(line)
             out_odenet.write(line)
         out_odenet.close()
+
+# Symmetrische Relationen hinzufügen. D.h.: Im Fall von Hyperonym auch die Hyponym-Relation, im Fall von Antonym auch die Rück-Relation usw.
+
+def add_antonym_rel_to_ss(synset, target, wordnetfile):
+    add_rel_to_ss(synset,"antonym",target,wordnetfile)
+    add_rel_to_ss(target,"antonym",synset,wordnetfile)
+
+def add_hypernym_rel_to_ss(synset,target,wordnetfile):
+    add_rel_to_ss(synset,"hypernym",target,wordnetfile)
+    add_rel_to_ss(target,"hyponym",synset,wordnetfile)
         
 # Attribute in Synsets verändern, z.B. ili
 # change_attribute_in_ss('odenet-412-a','ili','i10007',r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml")
