@@ -123,6 +123,22 @@ def add_antonym_rel_to_ss(synset, target, wordnetfile):
 def add_hypernym_rel_to_ss(synset,target,wordnetfile):
     add_rel_to_ss(synset,"hypernym",target,wordnetfile)
     add_rel_to_ss(target,"hyponym",synset,wordnetfile)
+
+# Rück-Relationen Hyperonym - Hyponym automatisch einfügen
+# Nur in der Datei, in der jeder Eintrag auf einer Zeile steht!
+
+def add_hypo_to_hyper(wordnetfile):
+    de_wn = open(wordnetfile,"r",encoding="utf-8")
+    lines = de_wn.readlines()
+    de_wn.close()
+    for synset in lexicon.iter('Synset'):
+        ss_id = synset.attrib['id']
+        hyp_list = hypernyms(ss_id)
+        if len(hyp_list) > 0:
+            for hyp_info in hyp_list:
+                hyp_id = hyp_info[0]
+#                hypo_rel = "<SynsetRelation target='" + ss_id + "' relType='hyponym'/>"
+                add_rel_to_ss(hyp_id,"hyponym",ss_id,wordnetfile)    
         
 # Attribute in Synsets verändern, z.B. ili
 # change_attribute_in_ss('odenet-412-a','ili','i10007',r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml")
