@@ -4,11 +4,13 @@
 # Importe
 
 from odenet import *
+from lxml import etree
 
 ########## LexEntries ######
 
 # Prüfung, ob es für ein Lemma mehrere LexEntries gibt
 # Das sind immer noch ganz schön viele!
+# Daher nicht in Standard-Test aufgenommen.
 
 def find_duplicate_lexentries():
     lemma_list = []
@@ -87,6 +89,8 @@ def test_synsets_pos():
 
 # Prüfung darauf, ob POS in Synset und Relation Target übereinstimmen
 # Das sind immer noch ziemlich viele
+# Daher nicht in Standard-Test aufgenommen.
+
 
 def test_relation_pos():
     for synset in lexicon.iter('Synset'):
@@ -96,7 +100,7 @@ def test_relation_pos():
                 print("Synset " + synset.attrib['id'] + " has different POS values in relation targets")
         
 
-# Prüfung darauf, ob POS in OdeNet und PWN übereinstimmen
+# Prüfung darauf, ob POS in OdeNet und PWN übereinstimmen --> TODO
 
 ########### SYNSET #############
 
@@ -190,7 +194,7 @@ def test_for_loops_in_hypo_relations(hypo_list):
         if converse_relation in hypo_list:
             print("Loop in relation " + str(relation))
 
-# Prüfung auf fehlende symmetrische Relationen (Antonym, Hypero-Hyponym)
+# Prüfung auf fehlende symmetrische Relationen (Hypero-Hyponym)
 
 def test_for_missing_symmetry(hyponym_relations,hypernym_relations):
     for relation in hyponym_relations:
@@ -208,12 +212,7 @@ def test_for_loops_in_relations():
     test_for_loops_in_hypo_relations(hypernym_relations)
     test_for_missing_symmetry(hyponym_relations,hypernym_relations)
 
-  
-
-
-
-
-
+ 
 # höchste Synset-ID
 
 def highest_synset_id():
@@ -221,17 +220,38 @@ def highest_synset_id():
     for synset in lexicon.iter('Synset'):
         synset_id = synset.attrib['id']
         odenet, number, pos = synset_id.split("-")
-        if number > top_id:
-            top_id = number
+        if int(number) > top_id:
+            top_id = int(number)
         else:
             top_id = top_id
-    print("Highest_Synset ID: " + str(top_id))
+    print("Highest synset ID: " + str(top_id))
     return(top_id)
 
 # höchste LexEntry-ID
 
+def highest_lex_id():
+    top_id = 0
+    for lexentry in lexicon.iter('LexicalEntry'):
+        lex_id = lexentry.attrib['id'][1:]
+        if int(lex_id) > top_id:
+            top_id = int(lex_id)
+        else:
+            top_id = top_id
+    print("Highest lexentry ID: w" + str(top_id))
+    return(top_id)
+    
+# Test auf valides XML
+
+def test_valid_xml():
+    parser = etree.XMLParser(dtd_validation=True, no_network=False)
+    tree = etree.parse("odenet/wordnet/deWordNet.xml", parser)
+
 
 def test_necessary_conditions():
+    print("Test for valid xml ...")
+    test_valid_xml()
+    highest_synset_id()
+    highest_lex_id()
     print("Test for POS in LexEntries ...")
     test_lexentries_pos()
     print("Test for POS in Synsets ...")
@@ -242,7 +262,7 @@ def test_necessary_conditions():
     test_target_in_relation()
     print("Test for loops and missing symmetry in relations ...")
     test_for_loops_in_relations()
-#    print("Test for synsets without words ...")
-#    test_for_empty_synsets()
+#    print("Test for synsets without words ...") 
+#    test_for_empty_synsets() # dauert ganz schön lange
     
     
