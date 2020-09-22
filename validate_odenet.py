@@ -143,7 +143,20 @@ def test_for_valid_ids():
             if not is_valid_synset_id(synset.attrib['id']):
                     print("Synset ID " + synset.attrib['id'] + " is not valid")
                 
+# Prüfen, ob ilis doppelt vergeben wurden
+# Das sind auch ganz schön viele!
+# Nicht in Standard-Test aufgenommen.
 
+def test_for_duplicate_ilis():
+    ili_list = []
+    for synset in lexicon.iter('Synset'):
+        synset_ili = synset.attrib['ili']
+        if len(synset_ili) > 0:
+            if synset_ili in ili_list:
+                print("Duplicated ILI: " + str(synset_ili))
+            else:
+                ili_list.append(synset_ili)
+        
 
 ######### RELATIONEN ########
 
@@ -262,7 +275,7 @@ def test_necessary_conditions():
     test_target_in_relation()
     print("Test for loops and missing symmetry in relations ...")
     test_for_loops_in_relations()
-#    print("Test for synsets without words ...") 
-#    test_for_empty_synsets() # dauert ganz schön lange
+    print("Test for synsets without words ...") 
+    test_for_empty_synsets() # dauert ganz schön lange
     
     
