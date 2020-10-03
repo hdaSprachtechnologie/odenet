@@ -295,6 +295,14 @@ def visualize_hyponyms():
     nx.draw_networkx(G, width=2, with_labels=True)
     plt.show()
 
+def give_all_senses(word):
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+        for sense in senses:
+            print("SYNSET: " + sense[1])
+            print(check_synset(sense[1]))
+    except TypeError:
+        print("No entry for word " + word)
 
                
 ## Die Klasse für den Zugriff auf OdeNet
