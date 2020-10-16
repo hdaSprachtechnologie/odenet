@@ -24,6 +24,17 @@ def find_duplicate_lexentries():
             lemma_list.append(lemma_value)
     print("Es gibt doppelte Einträge für " + str(len(lemma_list)) + " Lemmata!")
 
+# Prüfung, ob die Lex-ID mit der Sense-ID übereinstimmt
+
+def find_inconsistent_lexids():
+    for lexentry in lexicon.iter('LexicalEntry'):
+        lemma_id = lexentry.attrib['id']
+        for sense in lexentry.iter('Sense'):
+            sense_id = sense.attrib['id']
+            sense_w_id = sense_id.split('_')[0]
+            if sense_w_id != lemma_id:
+                print ("LexIDs inkonsistent in: " + lemma_id)
+
 ########## POS ###########
 
 # 1. LexEntries mit mehreren Senses, die POS haben, das anders als das POS des Lemmas ist
@@ -265,6 +276,8 @@ def test_necessary_conditions():
     test_valid_xml()
     highest_synset_id()
     highest_lex_id()
+    print("Test for inconstent IDs in LexEntries ...")
+    find_inconsistent_lexids()
     print("Test for POS in LexEntries ...")
     test_lexentries_pos()
     print("Test for POS in Synsets ...")
@@ -275,7 +288,7 @@ def test_necessary_conditions():
     test_target_in_relation()
     print("Test for loops and missing symmetry in relations ...")
     test_for_loops_in_relations()
-    print("Test for synsets without words ...") 
-    test_for_empty_synsets() # dauert ganz schön lange
+#    print("Test for synsets without words ...") 
+#    test_for_empty_synsets() # dauert ganz schön lange
     
     
