@@ -124,6 +124,12 @@ def add_hypernym_rel_to_ss(synset,target,wordnetfile):
     add_rel_to_ss(synset,"hypernym",target,wordnetfile)
     add_rel_to_ss(target,"hyponym",synset,wordnetfile)
 
+# Finger ist Meronym von Hand, Hand ist Holonym von Finger
+
+def add_mero_member_rel_to_ss(synset,target,wordnetfile):
+    add_rel_to_ss(synset,"mero_member",target,wordnetfile)
+    add_rel_to_ss(target,"holo_member",synset,wordnetfile)
+
 # Rück-Relationen Hyperonym - Hyponym automatisch einfügen
 # Nur in der Datei, in der jeder Eintrag auf einer Zeile steht!
 
