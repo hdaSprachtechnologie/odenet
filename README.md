@@ -16,11 +16,11 @@ and ili links (links to the multilingual concepts) were added. In autumn
 and winter of 2017 we worked on the syntactic categories. The main focus
 was on correcting the POS tags of the multiword lexemes.The next
 step in winter 2017/18 was the annotation of basic German words, as
-listed in https://de.wiktionary.org/wiki/Verzeichnis:Deutsch/
+listed in https://de.wiktionary.org/wiki/Verzeichnis:Deutsch
 Grundwortschatz. We annotated all lexical entries (except for function
 words) of this list with
 
-`dc:type="basic_German"`
+`dc:type="Basiswortschatz"`
 
 in Odenet, added missing entries and corrected synsets manually. Then,
 we implemented an analysis of German nominal compounds and used
