@@ -1,0 +1,64 @@
+name: Upload Assets
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      XMLPATH: odenet/wordnet/deWordNet.xml
+      DTD: WN-LMF-1.0.dtd
+      LICENSE: LICENSE
+      README:
+      CITATION:
+      BUILD_DIR: build
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup
+      run: |
+        sudo apt install xmlstarlet
+        # store the tag name and release version in the environment file
+        TAGNAME="${GITHUB_REF##*/}"  # full tag name
+        TAGVER="${TAGNAME#[Vv]}"    # strip off initial v, if any
+        echo "TAGNAME=$TAGNAME" >> "$GITHUB_ENV"
+        echo "TAGVER=$TAGVER" >> "$GITHUB_ENV"
+        wget "http://globalwordnet.github.io/schemas/${DTD}"
+    - name: Validate
+      run: |
+        fail() { echo "$1"; exit 1; }
+        info=$( xmlstarlet sel -t -m '/LexicalResource/Lexicon' \
+        	-v '@id' -o '	' \
+        	-v '@version' -o '	' \
+        	-v '@label' -n \
+        	"$XMLPATH" )
+        # only one <Lexicon> in the file
+        [ $( wc -l <<< "$info" ) -eq 1 ] || fail "Multiple <Lexicon> elements found"
+        IFS="	" read id version label <<< $( echo "$info" )
+        # version string matches
+        [ "$version" = "$TAGVER" -o "$version" = "$TAGNAME" ] || fail "Version string mismatch: $version != ( $TAGVER | $TAGNAME )"
+        # DTD validation
+        xmlstarlet val -d "$DTD" -e "$XMLPATH" || fail "DTD validation failed"
+        # now store values in the environment file
+        echo "id=$id" >> "$GITHUB_ENV"
+        echo "version=$version" >> "$GITHUB_ENV"
+        echo "label=\"$label\"" >> "$GITHUB_ENV"
+    - name: Make LMF Package
+      run: |
+        idver="${id}-${version}"
+        release="${BUILD_DIR}/${idver}"
+        mkdir -p "$release"
+        cp "$XMLPATH" "${release}/"
+        [ -n "$LICENSE" ] && cp "$LICENSE" "${release}/"
+        [ -n "$README" ] && cp "$README" "${release}/"
+        [ -n "$CITATION" ] && cp "$CITATION" "${release}/"
+        tar -cf "${release}.tar" -C "$BUILD_DIR" "${idver}"
+        xz -z "${release}.tar"
+        # remember the filename for the Upload step
+        echo "ASSET=${release}.tar.xz" >> "$GITHUB_ENV"
+    - name: Upload
+      run: |
+        gh release upload "${TAGNAME}" "${ASSET}#${label} ${TAGNAME}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
