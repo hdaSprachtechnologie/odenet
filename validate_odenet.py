@@ -35,6 +35,19 @@ def find_inconsistent_lexids():
             if sense_w_id != lemma_id:
                 print ("LexIDs inkonsistent in: " + lemma_id)
 
+# Prüfung, ob eine Synset-ID im LexEntry überhaupt existiert
+
+def test_for_existance_of_synset():
+    list_of_synsets = []
+    for synset in lexicon.iter('Synset'):
+        list_of_synsets.append(synset.attrib['id'])
+    for lexentry in lexicon.iter('LexicalEntry'):
+        lemma_id = lexentry.attrib['id']
+        for sense in lexentry.iter('Sense'):
+            sense_synset = sense.attrib['synset']
+            if sense_synset not in list_of_synsets:
+                print("Synset " + sense_synset + " from LexEntry " + lemma_id + " is not defined!")
+
 ########## POS ###########
 
 # 1. LexEntries mit mehreren Senses, die POS haben, das anders als das POS des Lemmas ist
@@ -288,6 +301,8 @@ def test_necessary_conditions():
     test_target_in_relation()
     print("Test for loops and missing symmetry in relations ...")
     test_for_loops_in_relations()
+    print("Test for existance of synsets ...")
+    test_for_existance_of_synset()
 #    print("Test for synsets without words ...") 
 #    test_for_empty_synsets() # dauert ganz schön lange
     
