@@ -8,13 +8,6 @@ import matplotlib.pyplot as plt
 import os
 G=nx.Graph()
 
-# TODO: this global file handling should be incorporated into a class
-
-# Ein- und Ausgabedateien: Achtung: OdeNet in der Version mit einem Eintrag pro Zeile, wenn man die Datei ändern will!
-
-#de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\odenet.git\trunk\deWordNet.xml","r",encoding="utf-8")
-#de_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","r",encoding="utf-8")
-en_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml","r",encoding="utf-8")
 
 de_wn_file = os.path.join(os.path.dirname(__file__), f"wordnet/deWordNet.xml")
 de_wn = open(de_wn_file,"r",encoding="utf-8")
@@ -24,17 +17,22 @@ de_wn = open(de_wn_file,"r",encoding="utf-8")
 
 #out_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","w",encoding="utf-8")
 
+# You need to set the local path to PWN here:
+# e.g.: get_english_wordnet_lexicon_local(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml")
+
+def get_english_wordnet_lexicon_local(pwnfile):
+     en_wn = open(pwnfile,"r",encoding="utf-8")
+     entree = ET.parse(en_wn)
+     enroot = entree.getroot()
+     enlexicon = enroot.find('Lexicon')
+     return enlexicon
+
+
 tree = ET.parse(de_wn)
 
 root = tree.getroot()
 
 lexicon = root.find('Lexicon')
-
-entree = ET.parse(en_wn)
-
-enroot = entree.getroot()
-
-enlexicon = enroot.find('Lexicon')
 
 de_wn.close()
 #en_wn.close()
@@ -69,7 +67,7 @@ def words_in_synset(id):
                 words.append(lemma)
     return(words)
 
-def en_words_in_synset(id):
+def en_words_in_synset(id, enlexicon):
     words = []
     for lexentry in enlexicon.iter('LexicalEntry'):
         for sense in lexentry.iter('Sense'):
@@ -320,25 +318,26 @@ class OdeNet(object):
         print("ANTONYMS: " + str(antonyms_word(object)))
         find_all_lexentries(object)                       
     pass
-    def check_ili_in_pwn(object):
-        for lexentry in enlexicon.iter('LexicalEntry'):
-            lemma = lexentry.find('Lemma')
-            lemma_value = lemma.attrib['writtenForm']
-            if lemma_value == object:
-                pos = lemma.attrib['partOfSpeech']
-                senses = []
-                for sense in lexentry.iter('Sense'):
-                    synset_id = sense.attrib['synset']
-                    senses.append(synset_id)
-                for sense in senses:
-                    words = en_words_in_synset(sense)
-                    print(str(words))
-                    for synset in enlexicon.iter('Synset'):
-                        if sense == synset.attrib['id']:
-                            ili = synset.attrib['ili']
-                            print(str(ili))
-                            definition = synset.find('Definition').text.strip()
-                            print(str(definition))
+    def check_ili_in_pwn(object,pwnfile):
+         enlexicon = get_english_wordnet_lexicon_local(pwnfile)
+         for lexentry in enlexicon.iter('LexicalEntry'):
+             lemma = lexentry.find('Lemma')
+             lemma_value = lemma.attrib['writtenForm']
+             if lemma_value == object:
+                 pos = lemma.attrib['partOfSpeech']
+                 senses = []
+                 for sense in lexentry.iter('Sense'):
+                     synset_id = sense.attrib['synset']
+                     senses.append(synset_id)
+                 for sense in senses:
+                     words = en_words_in_synset(sense,enlexicon)
+                     print(str(words))
+                     for synset in enlexicon.iter('Synset'):
+                         if sense == synset.attrib['id']:
+                             ili = synset.attrib['ili']
+                             print(str(ili))
+                             definition = synset.find('Definition').text.strip()
+                             print(str(definition))
     pass
     def word_id(object):
         lemma_id, lemma_value, pos, senses = check_word_lemma(object)
