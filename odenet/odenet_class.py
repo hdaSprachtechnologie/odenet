@@ -207,6 +207,23 @@ def antonyms_word(word):
                 anto_list.append((sense[0],antonym_synset,antonym_words))
     return(anto_list)
 
+def synonyms_word(word):
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+    except:
+        return(None)
+    syn_list = []
+    for sense in senses:
+        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        words.remove(word)
+        syn_list.append(words)
+ #       for w in words:
+ #           syn_list.append(w)
+#    syn_list.remove(word)
+#    return(sorted(set(syn_list)))
+    return(syn_list)
+
+
 def words2ids(wordlist):
     word_id_list = []
     for word in wordlist:
