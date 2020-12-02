@@ -12,7 +12,7 @@ jobs:
       DTD: WN-LMF-1.0.dtd
       LICENSE: LICENSE
       README:
-      CITATION:
+      CITATION: citation.bib
       BUILD_DIR: build
     steps:
     - uses: actions/checkout@v2
