@@ -6,7 +6,7 @@ Introduction
 
 The Open-de-WordNet initiative is based on the idea to have a German resource in a multilingual WordNet initiative, where the concepts (the synsets) of the languages are linked, and where the resources are under an open-source license, being eventually included in the NLTK language processing package. WordNet resources are largely used in NLP projects all over the world. Our idea is to create a German resource that starts from a crowd-developed thesaurus, is going to be open, and included in the NLTK package, such that it will be further developed by researchers while using the resource for their NLP projects.
 For the first version, we combined two existing resources: The OpenThesaurus German synonym lexicon (https://www.openthesaurus.de/) and the Open Multilingual WordNet English (http://compling.hss.ntu.edu.sg/omw/) resource, the PrincetonWordNet of English (PWN). The OpenThesaurus is a great chance of using a large resource, generated and updated by the crowd. The PWN resource is a well-developed resource for English concepts. It includes many relations between the concepts and is linked to resources for multiple languages. 
-Odenet is still at the very beginning of its history. The first version was
+OdeNet is still at the very beginning of its history. The first version was
 created in spring 2017 as an experimental project at Darmstadt University
 of Applied Sciences. It was completely automatically created. In the
 following months up to summer 2017, manual corrections were made
@@ -22,7 +22,7 @@ words) of this list with
 
 `dc:type="Basiswortschatz"`
 
-in Odenet, added missing entries and corrected synsets manually. Then,
+in OdeNet, added missing entries and corrected synsets manually. Then,
 we implemented an analysis of German nominal compounds and used
 this information for the addition of hypernym relations.
 
@@ -52,6 +52,8 @@ the package. The latter option provides only a link from your local
 Python environment to the actual directory and therefore it is
 possible to modify the files on the fly and still use the package
 in a pythonic way.
+
+OdeNet is now released in the WN package and can be downloaded and used from there. Documentation about the usage: https://wn.readthedocs.io/en/latest/index.html
 
 Basic Usage
 ---
