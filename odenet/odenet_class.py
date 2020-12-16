@@ -122,7 +122,10 @@ def find_all_lexentries(word_to_check):
             check_word_id(wid)            
         
 def hypernyms_word(word):
-    lemma_id, lemma, pos, senses = check_word_lemma(word)
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+    except:
+        return(None)
     hyp_list = []
     for sense in senses:
         (ili,definition,de_definition, relations, words) = check_synset(sense[1])
@@ -157,7 +160,10 @@ def hyponyms(sense):
     return(hyp_list)
 
 def hyponyms_word(word):
-    lemma_id, lemma, pos, senses = check_word_lemma(word)
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+    except:
+        return(None)
     hyp_list = []
     for sense in senses:
         (ili,definition,de_definition, relations, words) = check_synset(sense[1])
