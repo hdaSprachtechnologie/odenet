@@ -142,11 +142,28 @@ def hypernyms_word(word):
 def hypernyms(sense):
     hyp_list = []
     (ili,definition,de_definition, relations, words) = check_synset(sense)
-    for relation in relations:
-        if relation[0] == "hypernym":
-            hypernym_synset = relation[1]
-            hypernym_words = words_in_synset(relation[1])
-            hyp_list.append((hypernym_synset,hypernym_words))
+    if check_synset(sense)!= None:
+         for relation in relations:
+             if relation[0] == "hypernym":
+                 hypernym_synset = relation[1]
+                 hypernym_words = words_in_synset(relation[1])
+                 hyp_list.append((hypernym_synset,hypernym_words))
+             else:
+                  hyp_list = hyp_list
+    return(hyp_list)
+
+def hypernyms_path(synset,hyp_list):
+    if len(synset) > 0:
+        hyper=hypernyms(synset)
+        if len(hyper) > 0:
+            hyp = hyper[0][0]
+            hyp_list.append(hyp)
+            synset = hyp
+            hypernyms_path(synset,hyp_list)
+        else:
+            hyp_list = hyp_list
+    else:
+        hyp_list = hyp_list
     return(hyp_list)
 
 def hyponyms(sense):
