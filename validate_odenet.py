@@ -295,7 +295,7 @@ def test_necessary_conditions():
     test_lexentries_pos()
     print("Test for POS in Synsets ...")
     test_synsets_pos()
-    print("Test für valid IDs")
+    print("Test for valid IDs")
     test_for_valid_ids()
     print("Test for targets in relations ...")
     test_target_in_relation()
@@ -303,7 +303,10 @@ def test_necessary_conditions():
     test_for_loops_in_relations()
     print("Test for existance of synsets ...")
     test_for_existance_of_synset()
-#    print("Test for synsets without words ...") 
-#    test_for_empty_synsets() # dauert ganz schön lange
+#    print("Test for duplicate LexEntries ...") # sind ganz schön viele
+#    find_duplicate_lexentries()
+    print("Test for synsets without words ...") 
+    test_for_empty_synsets() # dauert ganz schön lange
+
     
     
