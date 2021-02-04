@@ -305,8 +305,8 @@ def test_necessary_conditions():
     test_for_existance_of_synset()
 #    print("Test for duplicate LexEntries ...") # sind ganz schön viele
 #    find_duplicate_lexentries()
-#    print("Test for synsets without words ...") 
-#    test_for_empty_synsets() # dauert ganz schön lange
+    print("Test for synsets without words ...") 
+    test_for_empty_synsets() # dauert ganz schön lange
 
     
     
