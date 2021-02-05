@@ -36,6 +36,7 @@ def find_inconsistent_lexids():
                 print ("LexIDs inkonsistent in: " + lemma_id)
 
 # Prüfung, ob eine Synset-ID im LexEntry überhaupt existiert
+# und ob eine Synset-ID in einer Relation überhaupt existiert
 
 def test_for_existance_of_synset():
     list_of_synsets = []
@@ -47,6 +48,10 @@ def test_for_existance_of_synset():
             sense_synset = sense.attrib['synset']
             if sense_synset not in list_of_synsets:
                 print("Synset " + sense_synset + " from LexEntry " + lemma_id + " is not defined!")
+    for synset in lexicon.iter('Synset'):
+        for relation in synset.iter('SynsetRelation'):
+            if relation.attrib['target'] not in list_of_synsets:
+                print("Synset " + synset.attrib['id'] + " has a relation to " + relation.attrib['target'] + ", but the target is not defined!") 
 
 ########## POS ###########
 
@@ -305,8 +310,8 @@ def test_necessary_conditions():
     test_for_existance_of_synset()
 #    print("Test for duplicate LexEntries ...") # sind ganz schön viele
 #    find_duplicate_lexentries()
-    print("Test for synsets without words ...") 
-    test_for_empty_synsets() # dauert ganz schön lange
+#    print("Test for synsets without words ...") 
+#    test_for_empty_synsets() # dauert ganz schön lange
 
     
     
