@@ -75,6 +75,29 @@ def en_words_in_synset(id, enlexicon):
                 lemma = lexentry.find('Lemma').attrib['writtenForm']
                 words.append(lemma)
     return(words)
+'''
+def en_words_in_ili(ili,pwnfile):
+     enlexicon = get_english_wordnet_lexicon_local(pwnfile)
+     words = []
+     for synset in enlexicon.iter('Synset'):
+          if ili == synset.attrib['ili']:
+               id = synset.attrib['id']
+               for lexentry in enlexicon.iter('LexicalEntry'):
+                    for sense in lexentry.iter('Sense'):
+                         if sense.attrib['synset'] == id:
+                              lemma = lexentry.find('Lemma').attrib['writtenForm']
+                              words.append(lemma)
+     return(words)
+'''     
+
+def check_ili(ili):
+     ili_synsets = []
+     if len(ili) > 1:
+          for synset in lexicon.iter('Synset'):  
+               if ili == synset.attrib['ili']:
+                    id = synset.attrib['id']
+                    ili_synsets.append(id)
+     return(ili_synsets)
 
 def check_synset(id):
     words = words_in_synset(id)
@@ -94,7 +117,8 @@ def check_synset(id):
                 reltype = relation.attrib['relType']
                 reltarget = relation.attrib['target']
                 relations.append((reltype,reltarget))
-            return(ili,en_definition,de_definition, relations, words)
+            ili_synsets = check_ili(ili)
+            return(ili,en_definition,de_definition, relations, words, ili_synsets)
 
 def check_word_id(word_id):    
     for lexentry in lexicon.iter('LexicalEntry'):
@@ -128,7 +152,7 @@ def hypernyms_word(word):
         return(None)
     hyp_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "hypernym":
                 hypernym_synset = relation[1]
@@ -141,7 +165,7 @@ def hypernyms_word(word):
 
 def hypernyms(sense):
     hyp_list = []
-    (ili,definition,de_definition, relations, words) = check_synset(sense)
+    (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense)
     if check_synset(sense)!= None:
          for relation in relations:
              if relation[0] == "hypernym":
@@ -168,7 +192,7 @@ def hypernyms_path(synset,hyp_list):
 
 def hyponyms(sense):
     hyp_list = []
-    (ili,definition,de_definition, relations, words) = check_synset(sense)
+    (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense)
     for relation in relations:
         if relation[0] == "hyponym":
             hyponym_synset = relation[1]
@@ -183,7 +207,7 @@ def hyponyms_word(word):
         return(None)
     hyp_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "hyponym":
                 hyponym_synset = relation[1]
@@ -198,7 +222,7 @@ def meronyms_word(word):
     lemma_id, lemma, pos, senses = check_word_lemma(word)
     mero_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "mero_part":
                 meronym_synset = relation[1]
@@ -210,7 +234,7 @@ def holonyms_word(word):
     lemma_id, lemma, pos, senses = check_word_lemma(word)
     holo_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "holo_part" or relation[0] == "holo_member":
                 holo_synset = relation[1]
@@ -222,7 +246,7 @@ def antonyms_word(word):
     lemma_id, lemma, pos, senses = check_word_lemma(word)
     anto_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "antonym":
                 antonym_synset = relation[1]
@@ -237,7 +261,7 @@ def synonyms_word(word):
         return(None)
     syn_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words) = check_synset(sense[1])
+        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
         words.remove(word)
         syn_list.append(words)
  #       for w in words:
@@ -349,13 +373,28 @@ class OdeNet(object):
     def word_info(object):
         (lemma_id, lemma_value, pos, senses) = check_word_lemma(object)
         print (lemma_value + " " + pos + " ")
+        print("------------------------")
         for sense in senses:
-            print("SENSE: " + str(sense[1]) + "  " + str(check_synset(sense[1])) + "\n")
-        print("HYPERNYMS: " + str(hypernyms_word(object)))
-        print("HYPONYMS: " + str(hyponyms_word(object)))
-        print("MERONYMS: " + str(meronyms_word(object)))
-        print("HOLONYMS: " + str(holonyms_word(object)))
-        print("ANTONYMS: " + str(antonyms_word(object)))
+            (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
+            print("SENSE: " + str(sense[1]))
+            print("ILI: " + str(ili))
+            if len(ili_list) > 1:
+                 print("MULTIPLE SENSES FOR ILI " + str(ili) + ": " + str(ili_list))
+            print("DEFINITION: " + str(definition))
+            print("DE_DEFINITION: " + str(de_definition))
+            print("WORDS: " + str(words))
+            print("RELATIONS: ")
+            for relation in relations:
+                 rel_words = words_in_synset(relation[1])
+                 print(str(relation) + ': ' + str(rel_words))
+#            print("RELATIONS: " + str(relations))
+            print("------------------------")
+#            print("SENSE: " + str(sense[1]) + "  " + str(check_synset(sense[1])) + "\n")
+#        print("HYPERNYMS: " + str(hypernyms_word(object)))
+#        print("HYPONYMS: " + str(hyponyms_word(object)))
+#        print("MERONYMS: " + str(meronyms_word(object)))
+#        print("HOLONYMS: " + str(holonyms_word(object)))
+#        print("ANTONYMS: " + str(antonyms_word(object)))
         find_all_lexentries(object)                       
     pass
     def check_ili_in_pwn(object,pwnfile):
@@ -379,6 +418,23 @@ class OdeNet(object):
                              definition = synset.find('Definition').text.strip()
                              print(str(definition))
     pass
+    def en_words_in_ili(ili,pwnfile):
+         enlexicon = get_english_wordnet_lexicon_local(pwnfile)
+         words = []
+         for synset in enlexicon.iter('Synset'):
+              if ili == synset.attrib['ili']:
+                   id = synset.attrib['id']
+                   for lexentry in enlexicon.iter('LexicalEntry'):
+                        for sense in lexentry.iter('Sense'):
+                             if sense.attrib['synset'] == id:
+                                  lemma = lexentry.find('Lemma').attrib['writtenForm']
+                                  words.append(lemma)
+         print("ENGLISH WORDS FOR THIS ILI: " + str(words))
+    pass
+    def de_words_in_ili(ili):
+         ili_synsets = check_ili(ili)
+         for synset in ili_synsets:
+              print(str(synset) + ": " + str(words_in_synset(synset)))
     def word_id(object):
         lemma_id, lemma_value, pos, senses = check_word_lemma(object)
         return lemma_id
