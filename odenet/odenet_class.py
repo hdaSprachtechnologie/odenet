@@ -219,7 +219,10 @@ def hyponyms_word(word):
     return(hyp_list)
 
 def meronyms_word(word):
-    lemma_id, lemma, pos, senses = check_word_lemma(word)
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+    except:
+        return(None)
     mero_list = []
     for sense in senses:
         (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
@@ -231,7 +234,10 @@ def meronyms_word(word):
     return(mero_list)
 
 def holonyms_word(word):
-    lemma_id, lemma, pos, senses = check_word_lemma(word)
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+    except:
+        return(None)
     holo_list = []
     for sense in senses:
         (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
@@ -243,7 +249,10 @@ def holonyms_word(word):
     return(holo_list)
 
 def antonyms_word(word):
-    lemma_id, lemma, pos, senses = check_word_lemma(word)
+    try:
+        lemma_id, lemma, pos, senses = check_word_lemma(word)
+    except:
+        return(None)
     anto_list = []
     for sense in senses:
         (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
@@ -371,7 +380,10 @@ def give_all_senses(word):
 
 class OdeNet(object):
     def word_info(object):
-        (lemma_id, lemma_value, pos, senses) = check_word_lemma(object)
+        try:
+            lemma_id, lemma, pos, senses = check_word_lemma(word)
+        except:
+            return(None)
         print (lemma_value + " " + pos + " ")
         print("------------------------")
         for sense in senses:
@@ -436,11 +448,17 @@ class OdeNet(object):
          for synset in ili_synsets:
               print(str(synset) + ": " + str(words_in_synset(synset)))
     def word_id(object):
-        lemma_id, lemma_value, pos, senses = check_word_lemma(object)
-        return lemma_id
+         try:
+              lemma_id, lemma, pos, senses = check_word_lemma(word)
+         except:
+              return(None)
+         return lemma_id
     pass
     def visualize(object):
-        lemma_id, lemma_value, pos, senses = check_word_lemma(object)
+        try:
+            lemma_id, lemma, pos, senses = check_word_lemma(word)
+        except:
+            return(None)
         if len(senses) == 1:
             sense = senses[0][1]
         else:
