@@ -381,7 +381,7 @@ def give_all_senses(word):
 class OdeNet(object):
     def word_info(object):
         try:
-            lemma_id, lemma, pos, senses = check_word_lemma(word)
+            lemma_id, lemma_value, pos, senses = check_word_lemma(object)
         except:
             return(None)
         print (lemma_value + " " + pos + " ")
@@ -449,14 +449,14 @@ class OdeNet(object):
               print(str(synset) + ": " + str(words_in_synset(synset)))
     def word_id(object):
          try:
-              lemma_id, lemma, pos, senses = check_word_lemma(word)
+              lemma_id, lemma, pos, senses = check_word_lemma(object)
          except:
               return(None)
          return lemma_id
     pass
     def visualize(object):
         try:
-            lemma_id, lemma, pos, senses = check_word_lemma(word)
+            lemma_id, lemma, pos, senses = check_word_lemma(object)
         except:
             return(None)
         if len(senses) == 1:
