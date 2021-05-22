@@ -72,3 +72,7 @@ The Open German WordNet is openly licensed under the [Creative Commons Attributi
 
 The Python code files are openly licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
+Citation
+---
+
+The canonical citation(s) are in [citation.bib](citation.bib), in bibtex format.  Please cite them when you write a paper that uses (or refers to) OdeNet.
