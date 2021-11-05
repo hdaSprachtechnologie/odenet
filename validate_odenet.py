@@ -47,7 +47,8 @@ def check_word_id(word_id, wordnet):
                 sense_id = sense.attrib['id']
                 synset_id = sense.attrib['synset']
                 senses.append([sense_id,synset_id])
-            print("LEMMA: " + lemma_value + "\nPOS: " + pos + "\nSENSE ID: " + sense_id)
+#            print("LEMMA ID: " + lemma_id + "LEMMA: " + lemma_value + "\nPOS: " + pos + "\nSENSE ID: " + sense_id)
+            print("LEMMA ID:\t" + lemma_id + "\tLEMMA:\t" + lemma_value + "\tPOS:\t" + pos + "\tSENSE:\t" + sense_id)
 
 def find_all_lexentries(word_to_check, wordnet):
     lexicon = get_wordnet_lexicon_local(wordnet)
@@ -140,6 +141,12 @@ def test_lexentries_pos(wordnet):
                 words = words_in_synset(synset_id,wordnet)
 #                out.write("-- " + lemma_value + " : " + pos + ": " + synset_id + " " + str(words) + " \n\n")
                 print("-- " + lemma_value + " : " + pos + ": " + synset_id + " " + str(words) + " \n\n")
+#        if re.match(r'^[a-zäöü]+$',lemma_value):
+#            if pos == 'n':
+#                synset_id = sense.attrib['synset']
+#                words = words_in_synset(synset_id,wordnet)
+#                out.write("-- " + lemma_value + " : " + pos + ": " + synset_id + " " + str(words) + " \n\n")
+#                print("-- " + lemma_value + " : " + pos + ": " + synset_id + " " + str(words) + " \n\n")
         if re.match(r'^[a-zäöü]+lich$',lemma_value):
             if pos == 'n':
                 synset_id = sense.attrib['synset']
@@ -177,6 +184,7 @@ def test_synsets_pos(wordnet):
 
 
 # Prüfung darauf, ob POS in Synset und Relation Target übereinstimmen
+# ('odenet-9996-n', '<SynsetRelation target="odenet-807-v" relType="hypernym"/>')
 
 
 def test_relation_pos(wordnet):
@@ -185,7 +193,8 @@ def test_relation_pos(wordnet):
         synset_pos = synset.attrib['partOfSpeech']
         for relation in synset.iter('SynsetRelation'):
             if relation.attrib['target'][-1] != synset_pos:
-                print("Synset " + synset.attrib['id'] + " has different POS values in relation targets")
+#                print("Synset " + synset.attrib['id'] + ' has different POS values in relation targets: <SynsetRelation target="' + relation.attrib['target'] + '" relType="' + relation.attrib['relType'] + '"/>')
+                print("('" + synset.attrib['id'] + "', '" + '<SynsetRelation target="' + relation.attrib['target'] + '" relType="' + relation.attrib['relType'] + '"/>' + "')")
         
 
 # Prüfung darauf, ob POS in OdeNet und PWN übereinstimmen --> TODO
@@ -358,32 +367,33 @@ def test_necessary_conditions(wordnet):
     g_wordDict = get_word_dict(wordnet)
     print("Test for valid xml ...")
     test_valid_xml(wordnet)
-    highest_synset_id(wordnet)
-    highest_lex_id(wordnet)
-    print("Test for inconstent IDs in LexEntries ...")
-    find_inconsistent_lexids(wordnet)
+#    print("Test for duplicate LexEntries ...") 
+#    find_duplicate_lexentries(wordnet)
     print("Test for POS in LexEntries ...")
     test_lexentries_pos(wordnet)
     print("Test for POS in Synsets ...")
     test_synsets_pos(wordnet)
     print("Test for POS in Relations ...")
     test_relation_pos(wordnet)
-    print("Test for valid IDs")
-    test_for_valid_ids(wordnet)
     print("Test for targets in relations ...")
     test_target_in_relation(wordnet)
-    print("Test for loops and missing symmetry in relations ...")
-    test_for_loops_in_relations(wordnet)
+#    print("Test for loops and missing symmetry in relations ...")
+#    test_for_loops_in_relations(wordnet)
     print("Test for existance of synsets ...")
     test_for_existance_of_synset(wordnet)
     print("Test for duplicate ilis...")
     test_for_duplicate_ilis(wordnet)
-#    print("Test for duplicate LexEntries ...") 
-#    find_duplicate_lexentries(wordnet)
     print("Test for synsets without words ...") 
     test_for_empty_synsets(wordnet) 
+    print("Test for inconstent IDs in LexEntries ...")
+    find_inconsistent_lexids(wordnet)
+    print("Test for valid IDs")
+    test_for_valid_ids(wordnet)
+    highest_synset_id(wordnet)
+    highest_lex_id(wordnet)
 
 
 #Main Program
 g_wordDict = get_word_dict('odenet/wordnet/deWordNet.xml')
 test_necessary_conditions('odenet/wordnet/deWordNet.xml')
+#find_duplicate_lexentries('odenet/wordnet/deWordNet.xml')
