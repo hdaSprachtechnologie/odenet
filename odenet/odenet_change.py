@@ -129,6 +129,10 @@ def add_hypernym_rel_to_ss(synset,target,wordnetfile):
     add_rel_to_ss(synset,"hypernym",target,wordnetfile)
     add_rel_to_ss(target,"hyponym",synset,wordnetfile)
 
+def add_feminine_rel_to_ss(synset,target,wordnetfile):
+    add_rel_to_ss(synset,"has_feminine",target,wordnetfile)
+    add_rel_to_ss(target,"has_masculine",synset,wordnetfile)
+
 # Finger ist Meronym von Hand, Hand ist Holonym von Finger
 
 def add_mero_member_rel_to_ss(synset,target,wordnetfile):
@@ -223,6 +227,8 @@ def add_definition_to_ss(synset,definition, wordnetfile):
             out_odenet.write(line)
         out_odenet.close()
 
+
+
 # Die englische Definition löschen
 def delete_english_definition(synset, wordnetfile):
         de_wn = open(wordnetfile,"r",encoding="utf-8")
@@ -232,7 +238,7 @@ def delete_english_definition(synset, wordnetfile):
         ss_string = '<Synset id="' + synset + '"'
         for line in lines:
             if ss_string in line and "dc:description" in line:
-                line=re.sub('dc:description="[\w\s]+"','',line)
+                line=re.sub('dc:description="[\w\s,]+"','',line)
                 print(line)
             out_odenet.write(line)
         out_odenet.close()

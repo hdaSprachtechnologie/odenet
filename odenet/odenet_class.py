@@ -99,13 +99,15 @@ def check_ili(ili):
                     ili_synsets.append(id)
      return(ili_synsets)
 
+
+
 def check_synset(id):
     words = words_in_synset(id)
     for synset in lexicon.iter('Synset'):
         if id == synset.attrib['id']:
             ili = synset.attrib['ili']
             try:
-                en_definition = synset.attrib["{http://purl.org/dc/elements/1.1/}description"]
+                en_definition = synset.attrib["{https://globalwordnet.github.io/schemas/dc/}description"]
             except KeyError:
                 en_definition = []
             if synset.find('Definition') != None:
@@ -375,6 +377,19 @@ def give_all_senses(word):
     except TypeError:
         print("No entry for word " + word)
 
+
+def en_ili_words(ili,pwnfile):
+         enlexicon = get_english_wordnet_lexicon_local(pwnfile)
+         words = []
+         for synset in enlexicon.iter('Synset'):
+              if ili == synset.attrib['ili']:
+                   id = synset.attrib['id']
+                   for lexentry in enlexicon.iter('LexicalEntry'):
+                        for sense in lexentry.iter('Sense'):
+                             if sense.attrib['synset'] == id:
+                                  lemma = lexentry.find('Lemma').attrib['writtenForm']
+                                  words.append(lemma)
+         return words
                
 ## Die Klasse für den Zugriff auf OdeNet
 
@@ -389,7 +404,7 @@ class OdeNet(object):
         for sense in senses:
             (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
             print("SENSE: " + str(sense[1]))
-            print("ILI: " + str(ili))
+            print("ILI: " + str(ili) + ' ' + str(en_ili_words(ili, r"C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\English_WN\english-wordnet-2021.xml")))
             if len(ili_list) > 1:
                  print("MULTIPLE SENSES FOR ILI " + str(ili) + ": " + str(ili_list))
             print("DEFINITION: " + str(definition))
@@ -442,6 +457,7 @@ class OdeNet(object):
                                   lemma = lexentry.find('Lemma').attrib['writtenForm']
                                   words.append(lemma)
          print("ENGLISH WORDS FOR THIS ILI: " + str(words))
+         return words
     pass
     def de_words_in_ili(ili):
          ili_synsets = check_ili(ili)
