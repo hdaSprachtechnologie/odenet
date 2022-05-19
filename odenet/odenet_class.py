@@ -12,13 +12,14 @@ G=nx.Graph()
 de_wn_file = os.path.join(os.path.dirname(__file__), f"wordnet/deWordNet.xml")
 de_wn = open(de_wn_file,"r",encoding="utf-8")
 
-#en_wn_file = os.path.join(os.path.dirname(__file__), f"..\..\..\..\English_WN\english-wordnet-2020.xml")
 #en_wn = open(en_wn_file,"r",encoding="utf-8")
 
 #out_wn = open(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\OdeNet\deWNaccess\odenet_oneline.xml","w",encoding="utf-8")
 
 # You need to set the local path to PWN here:
 # e.g.: get_english_wordnet_lexicon_local(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml")
+# pwnfile = os.path.join(os.path.dirname(__file__), r"C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\English_WN\english-wordnet-2021.xml")
+
 
 def get_english_wordnet_lexicon_local(pwnfile):
      en_wn = open(pwnfile,"r",encoding="utf-8")
@@ -27,6 +28,7 @@ def get_english_wordnet_lexicon_local(pwnfile):
      enlexicon = enroot.find('Lexicon')
      return enlexicon
 
+#pwn = get_english_wordnet_lexicon_local(r"C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\English_WN\english-wordnet-2021.xml")
 
 tree = ET.parse(de_wn)
 
@@ -408,7 +410,8 @@ class OdeNet(object):
         for sense in senses:
             (ili,definition,de_definition, relations, words,ili_list,de_example) = check_synset(sense[1])
             print("SENSE: " + str(sense[1]))
-            print("ILI: " + str(ili) + ' ' + str(en_ili_words(ili, r"C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\English_WN\english-wordnet-2021.xml")))
+#            print("ILI: " + str(ili) + ' ' + str(en_ili_words(ili, pwnfile)))
+            print("ILI: " + str(ili))
             if len(ili_list) > 1:
                  print("MULTIPLE SENSES FOR ILI " + str(ili) + ": " + str(ili_list))
             print("WORDS: " + str(words))
