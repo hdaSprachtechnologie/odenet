@@ -44,5 +44,9 @@ setup(
           'Topic :: Education',
           'Topic :: Text Processing :: Linguistic'
     ],
+    install_requires=[
+      'networkx',
+      'matplotlib'
+    ],
     long_description=long_description
 )
