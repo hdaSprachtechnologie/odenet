@@ -33,15 +33,19 @@ The jupyter notebook file contains methods to access the data.
 Installation
 ---
 
-For an Anaconda environment, where `pip` is available, please `cd`
-to the appropriate package directory, where the `setup.py` file is
-located and type either
+For an Anaconda environment, where `pip` is available, odenet can be installed by using the following command:
 
-`pip install .`
+```bash
+> pip install git+https://github.com/hdaSprachtechnologie/odenet
+```
 
 for a user installation or
 
-`pip install -e .`
+```bash
+> git clone https://github.com/hdaSprachtechnologie/odenet
+> cd odenet
+> pip install -e .
+```
 
 for a developer installation (`-e` for editable). 
 
