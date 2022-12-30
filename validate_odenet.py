@@ -394,6 +394,8 @@ def test_necessary_conditions(wordnet):
 
 
 #Main Program
-g_wordDict = get_word_dict('odenet/wordnet/deWordNet.xml')
-test_necessary_conditions('odenet/wordnet/deWordNet.xml')
-#find_duplicate_lexentries('odenet/wordnet/deWordNet.xml')
+#g_wordDict = get_word_dict('odenet/wordnet/deWordNet.xml')
+#test_necessary_conditions('odenet/wordnet/deWordNet.xml')
+#find_inconsistent_lexids('odenet/wordnet/deWordNet.xml')
+#test_for_valid_ids('odenet/wordnet/deWordNet.xml')
+test_valid_xml('odenet/wordnet/deWordNet.xml')
