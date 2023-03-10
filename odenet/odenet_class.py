@@ -18,7 +18,7 @@ de_wn = open(de_wn_file,"r",encoding="utf-8")
 
 # You need to set the local path to PWN here:
 # e.g.: get_english_wordnet_lexicon_local(r"C:\Users\melaniesiegel\Documents\05_Projekte\WordNet\English_WN\english-wordnet-2020.xml")
-# pwnfile = os.path.join(os.path.dirname(__file__), r"C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\English_WN\english-wordnet-2021.xml")
+pwnfile = os.path.join(os.path.dirname(__file__), r"C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\English_WN\english-wordnet-2021.xml")
 
 
 def get_english_wordnet_lexicon_local(pwnfile):
@@ -160,7 +160,7 @@ def hypernyms_word(word):
         return(None)
     hyp_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words,ili_list) = check_synset(sense[1])
+        (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "hypernym":
                 hypernym_synset = relation[1]
@@ -173,7 +173,7 @@ def hypernyms_word(word):
 
 def hypernyms(sense):
     hyp_list = []
-    (ili,definition,de_definition, relations, words,ili_list,de_example) = check_synset(sense)
+    (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense)
     if check_synset(sense)!= None:
          for relation in relations:
              if relation[0] == "hypernym":
@@ -200,7 +200,7 @@ def hypernyms_path(synset,hyp_list):
 
 def hyponyms(sense):
     hyp_list = []
-    (ili,definition,de_definition, relations, words,ili_list,de_example) = check_synset(sense)
+    (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense)
     for relation in relations:
         if relation[0] == "hyponym":
             hyponym_synset = relation[1]
@@ -215,7 +215,7 @@ def hyponyms_word(word):
         return(None)
     hyp_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words,ili_list, de_example) = check_synset(sense[1])
+        (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "hyponym":
                 hyponym_synset = relation[1]
@@ -233,7 +233,7 @@ def meronyms_word(word):
         return(None)
     mero_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words,ili_list, de_example) = check_synset(sense[1])
+        (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "mero_part":
                 meronym_synset = relation[1]
@@ -248,7 +248,7 @@ def holonyms_word(word):
         return(None)
     holo_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words,ili_list, de_example) = check_synset(sense[1])
+        (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "holo_part" or relation[0] == "holo_member":
                 holo_synset = relation[1]
@@ -263,7 +263,7 @@ def antonyms_word(word):
         return(None)
     anto_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words,ili_list, de_example) = check_synset(sense[1])
+        (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense[1])
         for relation in relations:
             if relation[0] == "antonym":
                 antonym_synset = relation[1]
@@ -278,7 +278,7 @@ def synonyms_word(word):
         return(None)
     syn_list = []
     for sense in senses:
-        (ili,definition,de_definition, relations, words,ili_list,de_example) = check_synset(sense[1])
+        (ili,en_definition,de_definition, relations, words, ili_synsets,de_example) = check_synset(sense[1])
         words.remove(word)
         syn_list.append(words)
  #       for w in words:
@@ -410,8 +410,8 @@ class OdeNet(object):
         for sense in senses:
             (ili,definition,de_definition, relations, words,ili_list,de_example) = check_synset(sense[1])
             print("SENSE: " + str(sense[1]))
-#            print("ILI: " + str(ili) + ' ' + str(en_ili_words(ili, pwnfile)))
-            print("ILI: " + str(ili))
+            print("ILI: " + str(ili) + ' ' + str(en_ili_words(ili, pwnfile)))
+#            print("ILI: " + str(ili))
             if len(ili_list) > 1:
                  print("MULTIPLE SENSES FOR ILI " + str(ili) + ": " + str(ili_list))
             print("WORDS: " + str(words))
