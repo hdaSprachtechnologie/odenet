@@ -293,6 +293,51 @@ def add_example_to_ss(synset,example, wordnetfile):
             out_odenet.write(line)
         out_odenet.close()
 
+#### POS ändern: Das erfordert multiple Änderungen
+
+# für das Synset, für die Synset ID, für alle Wörter im Synset und für die Sense-IDs
+
+# Änderung der Synset-ID
+
+def change_synset_id_pos(synset,pos,wordnetfile):
+        de_wn = open(wordnetfile,"r",encoding="utf-8")
+        lines = de_wn.readlines()
+        de_wn.close()
+        out_odenet = open(wordnetfile,"w",encoding="utf-8")
+        sense_id_string = '_' + synset[7:]
+        new_sense_id_string = '_' + synset[7:-1] + pos
+        new_synset = synset[:-1] + pos
+        for line in lines:
+            if synset in line:
+                line = line.replace(synset,new_synset)
+                line = line.replace(sense_id_string,new_sense_id_string)
+            out_odenet.write(line)
+        out_odenet.close()
+
+# Änderung des POS in einem LexEntry
+
+def change_pos_in_lexentry(lemma,pos,wordnetfile):
+        de_wn = open(wordnetfile,"r",encoding="utf-8")
+        lines = de_wn.readlines()
+        de_wn.close()
+        out_odenet = open(wordnetfile,"w",encoding="utf-8")
+        lemma_string = 'Lemma writtenForm="' + lemma + '"'
+        for line in lines:
+            if lemma_string in line:
+#                print(line)
+                line = re.sub("partOfSpeech" + '="[a-z]"', "partOfSpeech" + '="'+ pos +'"', line)
+#                print(line)
+            out_odenet.write(line)
+        out_odenet.close()
+ 
+# Änderung des POS für ein Synset, mit allen Implikationen
+
+def change_pos(synset,pos,wordnetfile):
+        change_attribute_in_ss(synset,"partOfSpeech",pos,wordnetfile)
+        words = words_in_synset(synset)
+        for lemma in words:
+            change_pos_in_lexentry(lemma,pos,wordnetfile)
+        change_synset_id_pos(synset,pos,wordnetfile)
 
 
 # Die Version ohne Zeilenumbruch als Pretty Print speichern
