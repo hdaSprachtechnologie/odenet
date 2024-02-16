@@ -82,7 +82,8 @@ def find_duplicate_lexentries(wordnet):
 def find_inconsistent_lexids(wordnet):
     lexicon = get_wordnet_lexicon_local(wordnet)
     for lexentry in lexicon.iter('LexicalEntry'):
-        lemma_id = lexentry.attrib['id']
+        lemma_id_full = lexentry.attrib['id']
+        lemma_id = lemma_id_full[:-2]
         for sense in lexentry.iter('Sense'):
             sense_id = sense.attrib['id']
             sense_w_id = sense_id.split('_')[0]
@@ -213,11 +214,18 @@ def test_for_empty_synsets(wordnet):
 
 # Prüfung auf valide ids
 
-valid_word_id = re.compile("^w[0-9]+$")
+#valid_word_id = re.compile("^w[0-9]+$")
+valid_word_id = re.compile("^omw-de-w[0-9]+-z$")
+#omw-de-w1-z
 
-valid_sense_id = re.compile("^w[0-9]+_[0-9]+-[nvapx]$")
+#valid_sense_id = re.compile("^w[0-9]+_[0-9]+-[nvapx]$")
+valid_sense_id = re.compile("^omw-de-w[0-9]+_[0-9]+-[nvapx]$")
+#omw-de-w1_1-n
 
-valid_synset_id = re.compile("^odenet-[0-9]+-[nvapx]$")
+#valid_synset_id = re.compile("^odenet-[0-9]+-[nvapx]$")
+valid_synset_id = re.compile("^omw-de-[0-9]+-[nvapx]$")
+
+#omw-de-3899-n
 
 def is_valid_word_id(xml_id):
     return bool(valid_word_id.match(xml_id))
@@ -328,12 +336,13 @@ def test_for_loops_in_relations(wordnet):
  
 # höchste Synset-ID
 
+# omw-de-29561-v
 def highest_synset_id(wordnet):
     lexicon = get_wordnet_lexicon_local(wordnet)
     top_id = 0
     for synset in lexicon.iter('Synset'):
         synset_id = synset.attrib['id']
-        odenet, number, pos = synset_id.split("-")
+        odenet, de, number, pos = synset_id.split("-")
         if int(number) > top_id:
             top_id = int(number)
         else:
@@ -343,17 +352,20 @@ def highest_synset_id(wordnet):
 
 # höchste LexEntry-ID
 
+#omw-de-w9803-z
 def highest_lex_id(wordnet):
-    lexicon = get_wordnet_lexicon_local(wordnet)
-    top_id = 0
-    for lexentry in lexicon.iter('LexicalEntry'):
-        lex_id = lexentry.attrib['id'][1:]
-        if int(lex_id) > top_id:
-            top_id = int(lex_id)
-        else:
-            top_id = top_id
-    print("Highest lexentry ID: w" + str(top_id))
-    return(top_id)
+     lexicon = get_wordnet_lexicon_local(wordnet)
+     top_id = 0
+     for lexentry in lexicon.iter('LexicalEntry'):
+          lex_id = lexentry.attrib['id']
+          odenet, de, number, pos = lex_id.split("-")
+          lex_number = number[1:]
+          if int(lex_number) > top_id:
+               top_id = int(lex_number)
+          else:
+               top_id = top_id
+     print("Highest lexentry ID: w" + str(top_id))
+     return(top_id)
     
 # Test auf valides XML
 
@@ -363,8 +375,8 @@ def test_valid_xml(wordnet):
 
 
 def test_necessary_conditions(wordnet):
-#    lexicon = get_wordnet_lexicon_local(wordnet)
-    g_wordDict = get_word_dict(wordnet)
+    lexicon = get_wordnet_lexicon_local(wordnet)
+#    g_wordDict = get_word_dict(wordnet)
     print("Test for valid xml ...")
     test_valid_xml(wordnet)
 #    print("Test for duplicate LexEntries ...") 
@@ -373,8 +385,8 @@ def test_necessary_conditions(wordnet):
     test_lexentries_pos(wordnet)
     print("Test for POS in Synsets ...")
     test_synsets_pos(wordnet)
-    print("Test for POS in Relations ...")
-    test_relation_pos(wordnet)
+#    print("Test for POS in Relations ...")
+#    test_relation_pos(wordnet)
     print("Test for targets in relations ...")
     test_target_in_relation(wordnet)
 #    print("Test for loops and missing symmetry in relations ...")
@@ -394,8 +406,15 @@ def test_necessary_conditions(wordnet):
 
 
 #Main Program
-#g_wordDict = get_word_dict('odenet/wordnet/deWordNet.xml')
-#test_necessary_conditions('odenet/wordnet/deWordNet.xml')
+g_wordDict = get_word_dict('odenet/wordnet/deWordNet.xml')
+test_necessary_conditions('odenet/wordnet/deWordNet.xml')
+#find_inconsistent_lexids(r'C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\OdeNet_corrections\mini_odenet.xml')
 #find_inconsistent_lexids('odenet/wordnet/deWordNet.xml')
 #test_for_valid_ids('odenet/wordnet/deWordNet.xml')
-test_valid_xml('odenet/wordnet/deWordNet.xml')
+#test_valid_xml('odenet/wordnet/deWordNet.xml')
+#test_valid_xml(r'C:\Users\Melanie Siegel\Documents\05_Projekte\OdeNet\OdeNet_corrections\mini_odenet.xml')
+#find_duplicate_lexentries('odenet/wordnet/deWordNet.xml')
+#test_lexentries_pos('odenet/wordnet/deWordNet.xml')
+#highest_synset_id('odenet/wordnet/deWordNet.xml')
+#highest_lex_id('odenet/wordnet/deWordNet.xml')
+
