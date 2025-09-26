@@ -143,16 +143,19 @@ def check_word_id(word_id):
             print("LEMMA: " + lemma_value + "\nPOS: " + pos + "\nSENSE ID: " + sense_id)
 
 def find_all_lexentries(word_to_check):
-    for lexentry in lexicon.iter('LexicalEntry'):
-        lemma = lexentry.find('Lemma')
-        lemma_value = lemma.attrib['writtenForm']
-        lemma_id = lexentry.attrib['id']
-        word_id_list = []
-        if lemma_value == word_to_check:
-            word_id_list.append(lemma_id)
-        for wid in word_id_list:
-            check_word_id(wid)            
-        
+     word_id_list = []
+     for lexentry in lexicon.iter('LexicalEntry'):
+          lemma = lexentry.find('Lemma')
+          lemma_value = lemma.attrib['writtenForm']
+          lemma_id = lexentry.attrib['id']
+          if lemma_value == word_to_check:
+               word_id_list.append(lemma_id)
+     for wid in word_id_list:
+          check_word_id(wid)     
+     return(word_id_list)
+
+
+   
 def hypernyms_word(word):
     try:
         lemma_id, lemma, pos, senses = check_word_lemma(word)

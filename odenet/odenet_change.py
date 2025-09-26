@@ -238,7 +238,7 @@ def delete_english_definition(synset, wordnetfile):
         ss_string = '<Synset id="' + synset + '"'
         for line in lines:
             if ss_string in line and "dc:description" in line:
-                line=re.sub('dc:description="[\w\s,]+"','',line)
+                line=re.sub(r'dc:description="[\w\s,]+"','',line)
                 print(line)
             out_odenet.write(line)
         out_odenet.close()
