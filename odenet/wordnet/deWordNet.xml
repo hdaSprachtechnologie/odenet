@@ -22319,11 +22319,9 @@
 	<Lemma writtenForm="mein Gutster" partOfSpeech="n"/>
 	<Sense id="omw-de-w4437_902-n" synset="omw-de-902-n"/>
 </LexicalEntry>
-<LexicalEntry id="omw-de-w4438-z" dc:type="Basiswortschatz">
+<LexicalEntry id="omw-de-w4438-z" dc:type="Basiswortschatz" confidenceScore="1.0">
 	<Lemma writtenForm="Leute" partOfSpeech="n"/>
-	<Sense id="omw-de-w4438_902-n" synset="omw-de-902-n"/>
 	<Sense id="omw-de-w4438_5631-n" synset="omw-de-5631-n"/>
-	<Sense id="omw-de-w4438_5680-n" synset="omw-de-5680-n"/>
 	<Sense id="omw-de-w4438_28308-n" synset="omw-de-28308-n"/>
 </LexicalEntry>
 <LexicalEntry id="omw-de-w4439-z">
@@ -115749,17 +115747,17 @@
 </LexicalEntry>
 <LexicalEntry id="omw-de-w24409-z">
 	<Lemma writtenForm="breite Masse" partOfSpeech="n"/>
-	<Sense id="omw-de-w24409_5680-n" synset="omw-de-5680-n"/>
+	<Sense id="omw-de-w24409_5631-n" synset="omw-de-5631-n"/>
 	<Sense id="omw-de-w24409_12852-n" synset="omw-de-12852-n"/>
 </LexicalEntry>
 <LexicalEntry id="omw-de-w24412-z">
 	<Lemma writtenForm="Allgemeinheit" partOfSpeech="n"/>
-	<Sense id="omw-de-w24412_5680-n" synset="omw-de-5680-n"/>
+	<Sense id="omw-de-w24412_5631-n" synset="omw-de-5631-n"/>
 	<Sense id="omw-de-w24412_10310-n" synset="omw-de-10310-n"/>
 </LexicalEntry>
 <LexicalEntry id="omw-de-w24413-z">
 	<Lemma writtenForm="gemeine Volk" partOfSpeech="n"/>
-	<Sense id="omw-de-w24413_5680-n" synset="omw-de-5680-n"/>
+	<Sense id="omw-de-w24413_5631-n" synset="omw-de-5631-n"/>
 	<Sense id="omw-de-w24413_25545-n" synset="omw-de-25545-n"/>
 </LexicalEntry>
 <LexicalEntry id="omw-de-w24414-z">
@@ -453979,10 +453977,6 @@
 	<Lemma writtenForm="Andesit" partOfSpeech="n"/>
 	<Sense id="omw-de-w107398_31752-n" synset="omw-de-31752-n"/>
 </LexicalEntry>
-<LexicalEntry id="omw-de-w107399-z">
-	<Lemma writtenForm="Gruppe" partOfSpeech="n"/>
-	<Sense id="omw-de-w107399_31753-n" synset="omw-de-31753-n"/>
-</LexicalEntry>
 <LexicalEntry id="omw-de-w107400-z">
 	<Lemma writtenForm="Krautwurst" partOfSpeech="n"/>
 	<Sense id="omw-de-w107400_31754-n" synset="omw-de-31754-n"/>
@@ -505830,6 +505824,7 @@
 	<SynsetRelation target="omw-de-25850-n" relType="hyponym"/>
 	<SynsetRelation target="omw-de-2426-n" relType="hypernym"/>
 	<SynsetRelation target='omw-de-12683-n' relType='hyponym'/>
+	<Example>Eine Frau wartet auf den Bus.</Example>
 </Synset>
 <Synset id="omw-de-10098-n" ili="i54784" partOfSpeech="n" dc:subject="noun.artifact">
 	<Definition>Betäubungsmittel, das als harte Droge gilt; ein stark süchtig machendes Morphinderivat; die intravenöse Injektion sorgt für den schnellsten und intensivsten Rausch.</Definition>
@@ -513760,10 +513755,8 @@
 	<SynsetRelation target="omw-de-6804-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-11904-a" ili="" partOfSpeech="a" dc:description="people collectively who are mentally retarded">
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-11905-a" ili="" partOfSpeech="a" dc:description="people collectively who are mentally retarded">
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-11906-v" ili="i22153" partOfSpeech="v" dc:description="lessen the strength of" dc:subject="verb.body">
 	<Definition>das Interesse an etwas oder jemandem verlieren oder sich langweilen</Definition>
@@ -524434,7 +524427,6 @@
 	<Definition>kindliche Einfachheit und Leichtgläubigkeit zeigend</Definition>
 </Synset>
 <Synset id="omw-de-14734-a" ili="" partOfSpeech="a" dc:description="people who are destined to die soon">
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-14735-n" ili="i68726" partOfSpeech="n" dc:subject="noun.cognition">
 	<Definition>(Biologie) eine wissenschaftliche Theorie über die Entstehung der Arten von Pflanzen und Tieren</Definition>
@@ -526110,7 +526102,6 @@
 </Synset>
 <Synset id="omw-de-15241-a" ili="i7494" partOfSpeech="a" dc:description="people in general considered as a whole" dc:subject="adj.all">
 	<Definition>weithin bekannt und geschätzt</Definition>
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-15242-n" ili="" partOfSpeech="n" dc:description="a business firm whose articles of incorporation have been approved in some state"/>
 <Synset id="omw-de-15243-v" ili="i35034" partOfSpeech="v" dc:description="the single one of its kind" dc:subject="verb.stative">
@@ -536897,7 +536888,6 @@
 	<Example>Sie interessiert sich für Literatur.</Example>
 </Synset>
 <Synset id="omw-de-18897-a" ili="" partOfSpeech="a" dc:description="people who are destined to die soon">
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-18898-v" ili="i24715" partOfSpeech="v" dc:description="know and comprehend the nature or meaning of" dc:subject="verb.cognition">
 	<Definition>verstehen</Definition>
@@ -538555,7 +538545,6 @@
 </Synset>
 <Synset id="omw-de-19510-n" ili="i117608" partOfSpeech="n" dc:description="the collective body of bishops" dc:subject="noun.time">
 	<Definition>die Amtszeit eines Bischofs</Definition>
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-19511-a" ili="" partOfSpeech="a"/>
 <Synset id="omw-de-19512-v" ili="i28051" partOfSpeech="v" dc:subject="verb.contact">
@@ -541630,7 +541619,6 @@
 <Synset id="omw-de-20597-n" ili="" partOfSpeech="n"/>
 <Synset id="omw-de-20598-n" ili="i94247" partOfSpeech="n" dc:description="people who lived in times long past" dc:subject="noun.person">
 	<Definition>deutscher Staatsmann; Bundeskanzler der Bundesrepublik Deutschland (1876-1967)</Definition>
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-20599-n" ili="" partOfSpeech="n"/>
 <Synset id="omw-de-206-n" ili="i69651" partOfSpeech="n" dc:description="the case expressing ownership" dc:subject="noun.communication">
@@ -548586,7 +548574,6 @@
 <Synset id="omw-de-23093-a" ili="" partOfSpeech="a" dc:description="in an unmerited manner"/>
 <Synset id="omw-de-23094-v" ili="" partOfSpeech="v"/>
 <Synset id="omw-de-23095-a" ili="" partOfSpeech="a" dc:description="people in general considered as a whole">
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 	<SynsetRelation target='omw-de-1821-a' relType='antonym'/>
 </Synset>
 <Synset id="omw-de-23096-a" ili="" partOfSpeech="a"/>
@@ -554535,7 +554522,6 @@
 </Synset>
 <Synset id="omw-de-25405-a" ili="i2485" partOfSpeech="a" dc:description="people collectively who are mentally retarded" dc:subject="adj.all">
 	<Definition>(vor allem bei Personen) ohne Sinn, Verstand oder Urteilsvermögen</Definition>
-	<SynsetRelation target="omw-de-28308-n" relType="hypernym"/>
 </Synset>
 <Synset id="omw-de-25406-a" ili="i11377" partOfSpeech="a" dc:subject="adj.all">
 	<Definition>an einer schweren Geisteskrankheit leidend</Definition>
@@ -562310,24 +562296,8 @@
 <Synset id="omw-de-28307-v" ili="i31123" partOfSpeech="v" dc:description="a lightweight cord" dc:subject="verb.motion">
 	<Definition>ausgelassen spielen</Definition>
 </Synset>
-<Synset id="omw-de-28308-n" ili="i79201" partOfSpeech="n" dc:description="(plural) any group of human beings collectively" dc:subject="noun.group">
-	<Definition>deine Eltern</Definition>
-	<SynsetRelation target="omw-de-9593-n" relType="hypernym"/>
-	<SynsetRelation target="omw-de-31370-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-7482-a" relType="mero_member"/>
-	<SynsetRelation target="omw-de-11904-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-11905-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-14734-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-15241-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-15877-n" relType="hyponym"/>
-	<SynsetRelation target="omw-de-18897-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-19510-n" relType="hyponym"/>
-	<SynsetRelation target="omw-de-20598-n" relType="hyponym"/>
-	<SynsetRelation target="omw-de-23095-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-25405-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-8169-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-9364-a" relType="hyponym"/>
-	<SynsetRelation target="omw-de-9707-n" relType="hyponym"/>
+<Synset id="omw-de-28308-n" ili="i79201" partOfSpeech="n" dc:subject="noun.group">
+	<Definition>Anrede einer Personengruppe</Definition>
 </Synset>
 <Synset id="omw-de-28309-n" ili="i66308" partOfSpeech="n" dc:description="the inner and longer of the two bones of the human forearm" dc:subject="noun.body">
 	<Definition>der innere und längere der beiden Knochen des menschlichen Unterarms</Definition>
@@ -589889,8 +589859,10 @@
 	<Definition>eine Krankheit der Rübenpflanzen</Definition>
 </Synset>
 <Synset id="omw-de-5631-n" ili="i79202" partOfSpeech="n" dc:description="a social division of people" dc:subject="noun.group">
-	<Definition>Mitglieder einer Familienlinie</Definition>
+	<Definition>Gruppe von Personen, Menschen meist unbestimmter, aber auch bestimmter Anzahl</Definition>
 	<SynsetRelation target="omw-de-538-n" relType="hyponym"/>
+	<SynsetRelation target='omw-de-734-n' relType='hypernym'/>
+	<Example>Die Leute feiern gern.</Example>
 </Synset>
 <Synset id="omw-de-5632-n" ili="i79225" partOfSpeech="n" dc:description="a structure consisting of a room or set of rooms at a single position along a vertical scale" dc:subject="noun.group">
 	<Definition>die Bewohner einer Etage</Definition>
@@ -590089,9 +590061,6 @@
 <Synset id="omw-de-568-v" ili="i28007" partOfSpeech="v" dc:description="air moving from an area of high pressure to an area of low pressure" dc:subject="verb.contact">
 	<Definition>mit einem chemischen Verfahren reinigen</Definition>
 	<SynsetRelation target="omw-de-773-n" relType="hypernym"/>
-</Synset>
-<Synset id="omw-de-5680-n" ili="i62052" partOfSpeech="n" dc:description="the quality of being universal; existing everywhere" dc:subject="noun.attribute">
-	<Definition>die Eigenschaft, allgemein oder weit verbreitet zu sein oder eine allgemeine Anwendbarkeit zu haben</Definition>
 </Synset>
 <Synset id="omw-de-5681-n" ili="" partOfSpeech="n"/>
 <Synset id="omw-de-5682-v" ili="i31228" partOfSpeech="v" dc:description="a long difficult walk" dc:subject="verb.motion">
@@ -596924,6 +596893,7 @@
 	<SynsetRelation target="omw-de-32488-n" relType="hyponym"/>
 	<SynsetRelation target="omw-de-10957-n" relType="hypernym"/>
 	<SynsetRelation target="omw-de-23031-n" relType="hyponym"/>
+	<SynsetRelation target='omw-de-5631-n' relType='hyponym'/>
 	<Example>Hunde gehören zur Klasse der Säugetiere.</Example>
 </Synset>
 <Synset id="omw-de-7340-n" ili="i40181" partOfSpeech="n" dc:description="a change for the better as a result of correcting abuses" dc:subject="noun.act">
